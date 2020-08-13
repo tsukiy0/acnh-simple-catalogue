@@ -14,3 +14,9 @@ jobs:
           docker-compose -f tasks/docker-compose.yml build build
           docker-compose -f tasks/docker-compose.yml run build
           docker-compose -f tasks/docker-compose.yml down
+      - name: cleanup
+        if: always()
+        run: |
+          docker-compose -f tasks/docker-compose.yml down --volumes --remove-orphans
+          docker system prune --force
+  
