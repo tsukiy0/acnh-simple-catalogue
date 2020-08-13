@@ -3,4 +3,4 @@
 set -euxo pipefail
 
 dotnet restore
-dotnet public -c Release
+dotnet publish -c Release
