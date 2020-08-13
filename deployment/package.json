@@ -1,0 +1,36 @@
+{
+  "name": "@acnh-simple-catalogue/deployment",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/parser": "^3.9.0",
+    "aws-cdk": "^1.58.0",
+    "eslint": "^7.6.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.4.0",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.2.0",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-budgets": "^1.58.0",
+    "@aws-cdk/aws-cloudformation": "^1.58.0",
+    "@aws-cdk/aws-cloudfront": "^1.58.0",
+    "@aws-cdk/aws-s3": "^1.58.0",
+    "@aws-cdk/aws-s3-deployment": "^1.58.0",
+    "@aws-cdk/core": "^1.58.0",
+    "source-map-support": "^0.5.19"
+  },
+  "scripts": {
+    "lint": "eslint \"./src/**/*.{ts,tsx}\"",
+    "lint:fix": "yarn lint --fix",
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "deploy": "cdk bootstrap && cdk deploy --require-approval never"
+  }
+}

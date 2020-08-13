@@ -1,8 +1,16 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "deployment"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "deployment": true,
+      "node_modules": true
+    }
+  }
 }

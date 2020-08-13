@@ -2,4 +2,5 @@
 
 set -euxo pipefail
 
-dotnet build
+dotnet restore
+dotnet public -c Release
