@@ -24,9 +24,18 @@
       "preLaunchTask": "build",
       "program": "${workspaceFolder}/IngestUtility/bin/Debug/netcoreapp3.1/IngestUtility.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/IngestUtilityTests",
+      "cwd": "${workspaceFolder}/IngestUtility",
       "console": "internalConsole",
       "stopAtEntry": false
+    },
+    {
+      "name": "Web",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "dotnet",
+      "args": ["run"],
+      "cwd": "${workspaceFolder}/Web"
     },
     {
       "name": ".NET Core Attach",

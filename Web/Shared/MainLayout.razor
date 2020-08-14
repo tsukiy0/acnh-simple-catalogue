@@ -1,15 +1,16 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="sidebar">
-    <NavMenu />
-</div>
-
-<div class="main">
-    <div class="top-row px-4">
-        <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-    </div>
-
-    <div class="content px-4">
+<Layout Class="layout">
+    <Header>
+        <div class="logo" />
+        <Menu Theme="MenuTheme.Dark" Mode="MenuMode.Horizontal" DefaultSelectedKeys=@(new[]{"2"})>
+            <MenuItem Key="1">nav 1</MenuItem>
+            <MenuItem Key="2">nav 2</MenuItem>
+            <MenuItem Key="3">nav 3</MenuItem>
+        </Menu>
+    </Header>
+    <Content Style="padding: 25px;">
         @Body
-    </div>
-</div>
+    </Content>
+    <Footer Style="text-align: center; ">Ant Design ©2018 Created by Ant UED</Footer>
+</Layout>
