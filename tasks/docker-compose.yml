@@ -10,6 +10,7 @@ services:
     environment:
       GOOGLE_API_KEY: ${GOOGLE_API_KEY}
       COMMUNITY_SHEET_ID: ${COMMUNITY_SHEET_ID}
+      OUTPUT_PATH: /app/Web/wwwroot/api/data.json
     command: ./tasks/build.sh
   deploy:
     build:

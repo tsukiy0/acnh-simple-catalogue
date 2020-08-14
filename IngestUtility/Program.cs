@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Shared;
@@ -13,12 +14,13 @@ namespace IngestUtility
             var configService = new EnvironmentConfigService();
             var apiKey = configService.Get("GOOGLE_API_KEY");
             var sheetId = configService.Get("COMMUNITY_SHEET_ID");
+            var outputPath = configService.Get("OUTPUT_PATH");
             var getSheetService = GetSheetService.Default(apiKey, sheetId, "Housewares");
             var service = new CommunitySheetIngestService(getSheetService);
 
             var result = await service.Ingest();
 
-            Console.WriteLine(JsonSerializer.Serialize(result));
+            await File.WriteAllTextAsync(outputPath, JsonSerializer.Serialize(result));
         }
     }
 }
