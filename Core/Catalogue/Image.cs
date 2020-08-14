@@ -4,7 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace Core.Catalogue
 {
-    public class Image
+    [JsonConverter(typeof(ImageJsonConverter))]
+    public struct Image
     {
         private Uri value { get; }
 

@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Core.Catalogue
 {
+    [JsonConverter(typeof(ItemConverter))]
     public struct Item
     {
         public readonly Id id;
@@ -21,6 +22,7 @@ namespace Core.Catalogue
             this.variant = variant;
         }
 
+        [JsonConverter(typeof(IdConverter))]
         public struct Id
         {
             private string value { get; }
@@ -41,6 +43,7 @@ namespace Core.Catalogue
             }
         }
 
+        [JsonConverter(typeof(NameConverter))]
         public struct Name
         {
             private string value { get; }
@@ -117,6 +120,8 @@ namespace Core.Catalogue
             }
         }
 
+
+        [JsonConverter(typeof(VariantConverter))]
         public struct Variant
         {
             public readonly Id id;
@@ -128,6 +133,7 @@ namespace Core.Catalogue
                 this.name = name;
             }
 
+            [JsonConverter(typeof(IdConverter))]
             public struct Id
             {
                 private readonly string value;
@@ -148,6 +154,8 @@ namespace Core.Catalogue
                 }
             }
 
+
+            [JsonConverter(typeof(NameConverter))]
             public struct Name
             {
                 private readonly string value;
