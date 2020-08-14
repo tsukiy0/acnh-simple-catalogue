@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.Catalogue;
 using FluentAssertions;
 using IngestUtility.IngestService;
 using Moq;
@@ -23,6 +24,13 @@ namespace IngestUtilityTests.IngestService
             var actual = await service.Ingest();
 
             actual.Should().HaveCount(1);
+            actual[0].Equals(new Item(
+                Item.Id.From("3821"),
+                Item.Name.From("air circulator"),
+                CatalogueStatus.FOR_SALE,
+                Image.From("https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"),
+                null
+            ));
         }
 
         private Mock<IGetSheetService> SetupGetSheetService(IList<IList<object>> rows)
