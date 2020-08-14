@@ -102,19 +102,19 @@ namespace Core.Catalogue
                 writer.WriteStartObject();
 
                 writer.WritePropertyName("id");
-                JsonSerializer.Serialize(value.id, options);
+                JsonSerializer.Serialize(writer, value.id, options);
 
                 writer.WritePropertyName("name");
-                JsonSerializer.Serialize(value.name, options);
+                JsonSerializer.Serialize(writer, value.name, options);
 
                 writer.WritePropertyName("catalogueStatus");
-                JsonSerializer.Serialize(value.catalogueStatus, options);
+                JsonSerializer.Serialize(writer, value.catalogueStatus, options);
 
                 writer.WritePropertyName("image");
-                JsonSerializer.Serialize(value.image, options);
+                JsonSerializer.Serialize(writer, value.image, options);
 
                 writer.WritePropertyName("variant");
-                JsonSerializer.Serialize(value.variant, options);
+                JsonSerializer.Serialize(writer, value.variant, options);
 
                 writer.WriteEndObject();
             }
@@ -245,10 +245,10 @@ namespace Core.Catalogue
                     writer.WriteStartObject();
 
                     writer.WritePropertyName("id");
-                    JsonSerializer.Serialize(value.id);
+                    JsonSerializer.Serialize(writer, value.id, options);
 
                     writer.WritePropertyName("name");
-                    JsonSerializer.Serialize(value.name);
+                    JsonSerializer.Serialize(writer, value.name, options);
 
                     writer.WriteEndObject();
                 }
