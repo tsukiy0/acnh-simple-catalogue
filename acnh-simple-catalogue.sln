@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngestUtility", "IngestUtility\IngestUtility.csproj", "{7733CEED-3FE0-42FE-860C-2C25D2815DB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngestUtilityTests", "IngestUtilityTests\IngestUtilityTests.csproj", "{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Release|x64.Build.0 = Release|Any CPU
 		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Release|x86.ActiveCfg = Release|Any CPU
 		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Release|x86.Build.0 = Release|Any CPU
+		{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}.Debug|x64.Build.0 = Debug|Any CPU
+		{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}.Debug|x86.Build.0 = Debug|Any CPU
+		{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}.Release|x64.ActiveCfg = Release|Any CPU
+		{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}.Release|x64.Build.0 = Release|Any CPU
+		{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}.Release|x86.ActiveCfg = Release|Any CPU
+		{68B7B5DF-5B5D-4FC2-B6B4-ABEA24D19845}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

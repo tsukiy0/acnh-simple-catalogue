@@ -9,7 +9,7 @@ namespace IngestUtility.CommunitySheetIngestService
     public static class ValueRangeExtensions
     {
         public class HeadersNotFoundException : BaseException { }
-        public static List<Dictionary<string, Object>> ZipValues(this ValueRange valueRange)
+        public static List<Dictionary<string, Object>> ToListDictionary(this ValueRange valueRange)
         {
             var rows = valueRange.Values;
 
