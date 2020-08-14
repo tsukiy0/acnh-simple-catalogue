@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{1DCD6C99-9838-4460-A23A-71D1D4F6BB7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IngestUtility", "IngestUtility\IngestUtility.csproj", "{7733CEED-3FE0-42FE-860C-2C25D2815DB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{1DCD6C99-9838-4460-A23A-71D1D4F6BB7C}.Release|x64.Build.0 = Release|Any CPU
 		{1DCD6C99-9838-4460-A23A-71D1D4F6BB7C}.Release|x86.ActiveCfg = Release|Any CPU
 		{1DCD6C99-9838-4460-A23A-71D1D4F6BB7C}.Release|x86.Build.0 = Release|Any CPU
+		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Debug|x64.Build.0 = Debug|Any CPU
+		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Debug|x86.Build.0 = Debug|Any CPU
+		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Release|x64.ActiveCfg = Release|Any CPU
+		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Release|x64.Build.0 = Release|Any CPU
+		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Release|x86.ActiveCfg = Release|Any CPU
+		{7733CEED-3FE0-42FE-860C-2C25D2815DB4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
