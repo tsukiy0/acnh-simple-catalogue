@@ -1,27 +1,21 @@
-using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Google.Apis.Sheets.v4.Data;
-using IngestUtility.CommunitySheetIngestService;
-using Moq;
+using IngestUtility.IngestService;
 using Xunit;
 
-namespace IngestUtilityTests.CommunitySheetIngestService
+namespace IngestUtilityTests.IngestService
 {
     [Trait("Category", "Unit")]
-    public class ValueRangeExtensionsTest
+    public class SheetsExtensionsTest
     {
         [Fact]
         public void ZipHeaderRowWithValueRows()
         {
-            var valueRangeMock = new Mock<ValueRange>();
-            valueRangeMock.SetupGet(_ => _.Values).Returns(new List<IList<object>> {
+            var actual = new List<IList<object>> {
                 new List<object> { "k1", "k2" },
                 new List<object> { "v1", "v2"},
                 new List<object> { "v3", "v4"}
-            });
-
-            var actual = valueRangeMock.Object.ToListDictionary();
+            }.ToListDictionary();
 
             actual.Should().HaveCount(2);
             actual[0]["k1"].Should().Be("v1");
@@ -33,14 +27,11 @@ namespace IngestUtilityTests.CommunitySheetIngestService
         [Fact]
         public void ZipOnlyExistingValues()
         {
-            var valueRangeMock = new Mock<ValueRange>();
-            valueRangeMock.SetupGet(_ => _.Values).Returns(new List<IList<object>> {
+            var actual = new List<IList<object>> {
                 new List<object> { "k1", "k2" },
                 new List<object> { "v1" },
                 new List<object> { "v2" }
-            });
-
-            var actual = valueRangeMock.Object.ToListDictionary();
+            }.ToListDictionary();
 
             actual.Should().HaveCount(2);
             actual[0]["k1"].Should().Be("v1");

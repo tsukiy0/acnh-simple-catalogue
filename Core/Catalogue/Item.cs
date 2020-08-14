@@ -4,17 +4,17 @@ namespace Core.Catalogue
     {
         public readonly Id id;
         public readonly Name name;
-        public readonly Variant? variant;
         public readonly CatalogueStatus catalogueStatus;
         public readonly Image image;
+        public readonly Variant? variant;
 
-        public Item(Id id, Name name, Variant variant, CatalogueStatus catalogueStatus, Image image)
+        public Item(Id id, Name name, CatalogueStatus catalogueStatus, Image image, Variant? variant)
         {
             this.id = id;
             this.name = name;
-            this.variant = variant;
             this.catalogueStatus = catalogueStatus;
             this.image = image;
+            this.variant = variant;
         }
 
         public struct Id

@@ -1,20 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Catalogue;
 using Core.Shared;
-using Google.Apis.Sheets.v4.Data;
 
-namespace IngestUtility.CommunitySheetIngestService
+namespace IngestUtility.IngestService
 {
-    public static class ValueRangeExtensions
+    public static class SheetsExtensions
     {
         public class HeadersNotFoundException : BaseException { }
 
-        public static List<Dictionary<string, Object>> ToListDictionary(this ValueRange valueRange)
+        public static List<Dictionary<string, Object>> ToListDictionary(this IList<IList<object>> rows)
         {
-            var rows = valueRange.Values;
-
             IList<string> headers = rows.First().Select(_ => _.ToString()).ToList();
 
             if (headers == null)
@@ -28,11 +24,6 @@ namespace IngestUtility.CommunitySheetIngestService
                     .ToDictionary(_ => _.First, _ => _.Second)
                 )
                 .ToList();
-        }
-
-        public static List<Item> ToListItem(this ValueRange valueRange)
-        {
-            return new List<Item>();
         }
     }
 }
