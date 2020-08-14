@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Core.Catalogue
 {
     public class Item
@@ -5,15 +7,16 @@ namespace Core.Catalogue
         private Id id;
         private Name name;
         private CatalogueStatus catalogueStatus;
-        private IList<Variant> variations;
         private Image image;
+        private IList<Variant> variants;
 
-        public Item(Id id, Name name, CatalogueStatus catalogueStatus, Image image)
+        public Item(Id id, Name name, CatalogueStatus catalogueStatus, Image image, IList<Variant> variants)
         {
             this.id = id;
             this.name = name;
             this.catalogueStatus = catalogueStatus;
             this.image = image;
+            this.variants = variants;
         }
 
         public class Id
@@ -62,7 +65,7 @@ namespace Core.Catalogue
             private Name name;
             private Image image;
 
-            public Item(Id id, Name name, Image image)
+            public Variant(Id id, Name name, Image image)
             {
                 this.id = id;
                 this.name = name;
