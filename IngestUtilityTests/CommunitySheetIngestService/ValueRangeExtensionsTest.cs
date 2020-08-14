@@ -8,6 +8,7 @@ using Xunit;
 
 namespace IngestUtilityTests.CommunitySheetIngestService
 {
+    [Trait("Category", "Unit")]
     public class ValueRangeExtensionsTest
     {
         [Fact]
