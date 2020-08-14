@@ -4,7 +4,7 @@ using Core.Catalogue;
 
 namespace IngestUtility
 {
-    public interface IngestService
+    public interface IIngestService
     {
         Task<IList<Item>> Ingest();
     }
