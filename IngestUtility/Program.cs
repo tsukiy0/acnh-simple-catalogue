@@ -11,8 +11,8 @@ namespace IngestUtility
         static async Task Main(string[] args)
         {
             var configService = new EnvironmentConfigService();
-            var apiKey = configService.Get("API_KEY");
-            var sheetId = configService.Get("SHEET_ID");
+            var apiKey = configService.Get("GOOGLE_API_KEY");
+            var sheetId = configService.Get("COMMUNITY_SHEET_ID");
             var getSheetService = GetSheetService.Default(apiKey, sheetId, "Housewares");
             var service = new CommunitySheetIngestService(getSheetService);
 

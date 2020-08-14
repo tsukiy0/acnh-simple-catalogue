@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: build
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          COMMUNITY_SHEET_ID: ${{ secrets.COMMUNITY_SHEET_ID }}
         run: |
           docker-compose -f tasks/docker-compose.yml build build
           docker-compose -f tasks/docker-compose.yml run build

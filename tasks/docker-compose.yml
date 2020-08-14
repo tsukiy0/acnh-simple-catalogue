@@ -7,6 +7,9 @@ services:
     volumes: 
       - ..:/app
     working_dir: /app
+    environment:
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+      COMMUNITY_SHEET_ID: ${COMMUNITY_SHEET_ID}
     command: ./tasks/build.sh
   deploy:
     build:
