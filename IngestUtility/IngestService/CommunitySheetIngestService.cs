@@ -40,7 +40,7 @@ namespace IngestUtility.IngestService
 
         private Item.Variant? GetVariant(Dictionary<string, Object> row)
         {
-            var variantId = row["Variant ID"]?.ToString();
+            var variantId = row.GetValueOrDefault("Variant ID", null)?.ToString();
 
             if (variantId == null)
             {

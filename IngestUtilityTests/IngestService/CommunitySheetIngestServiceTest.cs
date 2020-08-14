@@ -58,6 +58,28 @@ namespace IngestUtilityTests.IngestService
             ));
         }
 
+        [Fact]
+        public async Task NullVariantItem()
+        {
+            var mock = SetupGetSheetService(new List<IList<object>>
+            {
+                    new List<object> { "Internal ID", "Name", "Catalog", "Image" },
+                    new List<object> { "5036", "aqua tile flooring", "For sale", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/RoomTexFloorTile01.png"")"},
+            });
+            var service = new CommunitySheetIngestService(mock.Object);
+
+            var actual = await service.Ingest();
+
+            actual.Should().HaveCount(1);
+            actual[0].Equals(new Item(
+                Item.Id.From("5036"),
+                Item.Name.From("aqua tile flooring"),
+                CatalogueStatus.FOR_SALE,
+                Image.From("https://acnhcdn.com/latest/FtrIcon/RoomTexFloorTile01.png"),
+                null
+            ));
+        }
+
         [Theory]
         [InlineData("For sale", CatalogueStatus.FOR_SALE)]
         [InlineData("Not for sale", CatalogueStatus.NOT_FOR_SALE)]
