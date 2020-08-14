@@ -58,6 +58,39 @@ namespace IngestUtilityTests.IngestService
             ));
         }
 
+        [Theory]
+        [InlineData("For sale", CatalogueStatus.FOR_SALE)]
+        [InlineData("Not for sale", CatalogueStatus.NOT_FOR_SALE)]
+        [InlineData("Not in catalog", CatalogueStatus.NOT_EXIST)]
+        public async Task KnownCatalogueStatus(string input, CatalogueStatus output)
+        {
+            var mock = SetupGetSheetService(new List<IList<object>>
+            {
+                    new List<object> { "Internal ID", "Name", "Catalog", "Image", "Variant ID", "Variation" },
+                    new List<object> { "3821", "air circulator", input, @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"")", "2_0", "Pink"},
+            });
+            var service = new CommunitySheetIngestService(mock.Object);
+
+            var actual = await service.Ingest();
+
+            actual[0].catalogueStatus.Should().Be(output);
+        }
+
+        [Fact]
+        public async Task UnknownCatalogueStatus()
+        {
+            var mock = SetupGetSheetService(new List<IList<object>>
+            {
+                    new List<object> { "Internal ID", "Name", "Catalog", "Image", "Variant ID", "Variation" },
+                    new List<object> { "3821", "air circulator", "bad", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"")", "2_0", "Pink"},
+            });
+            var service = new CommunitySheetIngestService(mock.Object);
+
+            await FluentActions.Invoking(async () => await service.Ingest())
+                .Should()
+                .ThrowAsync<CommunitySheetIngestService.BadCatalogueStatusStringException>();
+        }
+
         private Mock<IGetSheetService> SetupGetSheetService(IList<IList<object>> rows)
         {
             var mock = new Mock<IGetSheetService>();
