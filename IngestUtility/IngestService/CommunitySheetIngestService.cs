@@ -34,7 +34,27 @@ namespace IngestUtility.IngestService
                 Item.Name.From(row["Name"].ToString()),
                 CatalogueStatusFromString(row["Catalog"].ToString()),
                 ImageFromString(row["Image"].ToString()),
-                null
+                GetVariant(row)
+            );
+        }
+
+        private Item.Variant? GetVariant(Dictionary<string, Object> row)
+        {
+            var variantId = row["Variant ID"]?.ToString();
+
+            if (variantId == null)
+            {
+                return null;
+            }
+
+            if (variantId.ToString() == "NA")
+            {
+                return null;
+            }
+
+            return new Item.Variant(
+                Item.Variant.Id.From(variantId.ToString()),
+                Item.Variant.Name.From(row["Variation"].ToString())
             );
         }
 
