@@ -1,25 +1,23 @@
-using System.Collections.Generic;
-
 namespace Core.Catalogue
 {
-    public class Item
+    public struct Item
     {
-        private Id id;
-        private Name name;
-        private CatalogueStatus catalogueStatus;
-        private Image image;
-        private IList<Variant> variants;
+        public readonly Id id;
+        public readonly Name name;
+        public readonly Variant? variant;
+        public readonly CatalogueStatus catalogueStatus;
+        public readonly Image image;
 
-        public Item(Id id, Name name, CatalogueStatus catalogueStatus, Image image, IList<Variant> variants)
+        public Item(Id id, Name name, Variant variant, CatalogueStatus catalogueStatus, Image image)
         {
             this.id = id;
             this.name = name;
+            this.variant = variant;
             this.catalogueStatus = catalogueStatus;
             this.image = image;
-            this.variants = variants;
         }
 
-        public class Id
+        public struct Id
         {
             private string value { get; }
 
@@ -39,7 +37,7 @@ namespace Core.Catalogue
             }
         }
 
-        public class Name
+        public struct Name
         {
             private string value { get; }
 
@@ -59,22 +57,20 @@ namespace Core.Catalogue
             }
         }
 
-        public class Variant
+        public struct Variant
         {
-            private Id id;
-            private Name name;
-            private Image image;
+            public readonly Id id;
+            public readonly Name name;
 
-            public Variant(Id id, Name name, Image image)
+            public Variant(Id id, Name name)
             {
                 this.id = id;
                 this.name = name;
-                this.image = image;
             }
 
-            public class Id
+            public struct Id
             {
-                private string value { get; }
+                private readonly string value;
 
                 private Id(string value)
                 {
@@ -92,9 +88,9 @@ namespace Core.Catalogue
                 }
             }
 
-            public class Name
+            public struct Name
             {
-                private string value { get; }
+                private readonly string value;
 
                 private Name(string value)
                 {
