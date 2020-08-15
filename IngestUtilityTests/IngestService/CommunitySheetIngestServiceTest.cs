@@ -16,8 +16,8 @@ namespace IngestUtilityTests.IngestService
         {
             var mock = SetupGetSheetService(new List<IList<object>>
             {
-                    new List<object> { "Internal ID", "Name", "Catalog", "Image", "Variant ID", "Variant" },
-                    new List<object> { "1317", "anatomical model", "For sale", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrAnatomicalmodel.png"")", "NA", "NA"},
+                    new List<object> { "Internal ID", "Name", "Catalog", "Source", "Image", "Variant ID", "Variant" },
+                    new List<object> { "1317", "anatomical model", "For sale", "Nook's Cranny", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrAnatomicalmodel.png"")", "NA", "NA"},
             });
             var service = new CommunitySheetIngestService(mock.Object);
 
@@ -28,6 +28,7 @@ namespace IngestUtilityTests.IngestService
                 Item.Id.From("1317"),
                 Item.Name.From("anatomical model"),
                 CatalogueStatus.FOR_SALE,
+                Source.NOOKS_CRANNY,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAnatomicalmodel.png"),
                 null
             ));
@@ -38,8 +39,8 @@ namespace IngestUtilityTests.IngestService
         {
             var mock = SetupGetSheetService(new List<IList<object>>
             {
-                    new List<object> { "Internal ID", "Name", "Catalog", "Image", "Variant ID", "Variation" },
-                    new List<object> { "3821", "air circulator", "For sale", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"")", "2_0", "Pink"},
+                    new List<object> { "Internal ID", "Name", "Catalog", "Source", "Image", "Variant ID", "Variation" },
+                    new List<object> { "3821", "air circulator", "For sale", "Nook's Cranny", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"")", "2_0", "Pink"},
             });
             var service = new CommunitySheetIngestService(mock.Object);
 
@@ -50,6 +51,7 @@ namespace IngestUtilityTests.IngestService
                 Item.Id.From("3821"),
                 Item.Name.From("air circulator"),
                 CatalogueStatus.FOR_SALE,
+                Source.NOOKS_CRANNY,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"),
                 new Item.Variant(
                     Item.Variant.Id.From("2_0"),
@@ -63,8 +65,8 @@ namespace IngestUtilityTests.IngestService
         {
             var mock = SetupGetSheetService(new List<IList<object>>
             {
-                    new List<object> { "Internal ID", "Name", "Catalog", "Image" },
-                    new List<object> { "5036", "aqua tile flooring", "For sale", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/RoomTexFloorTile01.png"")"},
+                    new List<object> { "Internal ID", "Name", "Catalog", "Source", "Image" },
+                    new List<object> { "5036", "aqua tile flooring", "For sale", "Nook's Cranny", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/RoomTexFloorTile01.png"")"},
             });
             var service = new CommunitySheetIngestService(mock.Object);
 
@@ -75,6 +77,7 @@ namespace IngestUtilityTests.IngestService
                 Item.Id.From("5036"),
                 Item.Name.From("aqua tile flooring"),
                 CatalogueStatus.FOR_SALE,
+                Source.NOOKS_CRANNY,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/RoomTexFloorTile01.png"),
                 null
             ));
@@ -88,8 +91,8 @@ namespace IngestUtilityTests.IngestService
         {
             var mock = SetupGetSheetService(new List<IList<object>>
             {
-                    new List<object> { "Internal ID", "Name", "Catalog", "Image", "Variant ID", "Variation" },
-                    new List<object> { "3821", "air circulator", input, @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"")", "2_0", "Pink"},
+                    new List<object> { "Internal ID", "Name", "Catalog", "Source", "Image", "Variant ID", "Variation" },
+                    new List<object> { "3821", "air circulator", input, "Nook's Cranny", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"")", "2_0", "Pink"},
             });
             var service = new CommunitySheetIngestService(mock.Object);
 
@@ -103,14 +106,32 @@ namespace IngestUtilityTests.IngestService
         {
             var mock = SetupGetSheetService(new List<IList<object>>
             {
-                    new List<object> { "Internal ID", "Name", "Catalog", "Image", "Variant ID", "Variation" },
-                    new List<object> { "3821", "air circulator", "bad", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"")", "2_0", "Pink"},
+                    new List<object> { "Internal ID", "Name", "Catalog", "Source", "Image", "Variant ID", "Variation" },
+                    new List<object> { "3821", "air circulator", "bad", "Nooks's Cranny", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"")", "2_0", "Pink"},
             });
             var service = new CommunitySheetIngestService(mock.Object);
 
             await FluentActions.Invoking(async () => await service.Ingest())
                 .Should()
                 .ThrowAsync<CommunitySheetIngestService.BadCatalogueStatusStringException>();
+        }
+
+        [Theory]
+        [InlineData("Nook's Cranny", Source.NOOKS_CRANNY)]
+        [InlineData("Crafting", Source.CRAFTING)]
+        [InlineData("Mom", Source.UNKNOWN)]
+        public async Task KnownSource(string input, Source output)
+        {
+            var mock = SetupGetSheetService(new List<IList<object>>
+            {
+                    new List<object> { "Internal ID", "Name", "Catalog", "Source", "Image", "Variant ID", "Variation" },
+                    new List<object> { "3821", "air circulator", "For sale", input, @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"")", "2_0", "Pink"},
+            });
+            var service = new CommunitySheetIngestService(mock.Object);
+
+            var actual = await service.Ingest();
+
+            actual[0].source.Should().Be(output);
         }
 
         private Mock<IGetSheetService> SetupGetSheetService(IList<IList<object>> rows)

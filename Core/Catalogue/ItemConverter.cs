@@ -23,6 +23,7 @@ namespace Core.Catalogue
             public string id { get; set; }
             public string name { get; set; }
             public CatalogueStatus catalogueStatus { get; set; }
+            public Source source { get; set; }
             public string image { get; set; }
             [JsonConverter(typeof(NullableStructSerializerFactory))]
             public VariantJson? variant { get; set; }
@@ -34,6 +35,7 @@ namespace Core.Catalogue
                     id = input.id.ToString(),
                     name = input.name.ToString(),
                     catalogueStatus = input.catalogueStatus,
+                    source = input.source,
                     image = input.image.ToString(),
                     variant = input.variant.Select(_ => VariantJson.From(_))
                 };
@@ -45,6 +47,7 @@ namespace Core.Catalogue
                     Item.Id.From(id),
                     Item.Name.From(name),
                     catalogueStatus,
+                    source,
                     Image.From(image),
                     variant.Select(_ => _.To())
                 );

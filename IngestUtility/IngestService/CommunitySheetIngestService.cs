@@ -33,6 +33,7 @@ namespace IngestUtility.IngestService
                 Item.Id.From(row["Internal ID"].ToString()),
                 Item.Name.From(row["Name"].ToString()),
                 CatalogueStatusFromString(row["Catalog"].ToString()),
+                SourceFromString(row["Source"].ToString()),
                 ImageFromString(row["Image"].ToString()),
                 GetVariant(row)
             );
@@ -72,6 +73,19 @@ namespace IngestUtility.IngestService
                     return CatalogueStatus.NOT_EXIST;
                 default:
                     throw new BadCatalogueStatusStringException();
+            }
+        }
+
+        private Source SourceFromString(string input)
+        {
+            switch (input)
+            {
+                case "Crafting":
+                    return Source.CRAFTING;
+                case "Nook's Cranny":
+                    return Source.NOOKS_CRANNY;
+                default:
+                    return Source.UNKNOWN;
             }
         }
 

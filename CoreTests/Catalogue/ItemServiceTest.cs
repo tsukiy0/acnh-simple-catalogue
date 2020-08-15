@@ -18,6 +18,7 @@ namespace CoreTests.Catalogue
                     Item.Id.From("1"),
                     Item.Name.From("acoustic guitar"),
                     CatalogueStatus.NOT_FOR_SALE,
+                    Source.CRAFTING,
                     Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
                     null
                 );
@@ -40,6 +41,7 @@ namespace CoreTests.Catalogue
                     Item.Id.From("1"),
                     Item.Name.From("acoustic guitar"),
                     CatalogueStatus.NOT_FOR_SALE,
+                    Source.CRAFTING,
                     Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
                     new Item.Variant(
                         Item.Variant.Id.From("0_0"),
@@ -50,6 +52,7 @@ namespace CoreTests.Catalogue
                     Item.Id.From("1"),
                     Item.Name.From("acoustic guitar"),
                     CatalogueStatus.NOT_FOR_SALE,
+                    Source.CRAFTING,
                     Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
                     new Item.Variant(
                         Item.Variant.Id.From("1_0"),
@@ -82,6 +85,7 @@ namespace CoreTests.Catalogue
                     Item.Id.From("1"),
                     Item.Name.From("acoustic guitar"),
                     CatalogueStatus.NOT_FOR_SALE,
+                    Source.CRAFTING,
                     Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
                     null
                 );
@@ -102,6 +106,7 @@ namespace CoreTests.Catalogue
                     Item.Id.From("1"),
                     Item.Name.From("acoustic guitar"),
                     CatalogueStatus.NOT_FOR_SALE,
+                    Source.CRAFTING,
                     Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
                     new Item.Variant(
                         Item.Variant.Id.From("1_0"),
@@ -125,6 +130,7 @@ namespace CoreTests.Catalogue
                     Item.Id.From("1"),
                     Item.Name.From("acoustic guitar"),
                     CatalogueStatus.NOT_FOR_SALE,
+                    Source.CRAFTING,
                     Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
                     new Item.Variant(
                         Item.Variant.Id.From("1_0"),

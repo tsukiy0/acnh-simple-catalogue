@@ -8,14 +8,16 @@ namespace Core.Catalogue
         public readonly Id id;
         public readonly Name name;
         public readonly CatalogueStatus catalogueStatus;
+        public readonly Source source;
         public readonly Image image;
         public readonly Variant? variant;
 
-        public Item(Id id, Name name, CatalogueStatus catalogueStatus, Image image, Variant? variant)
+        public Item(Id id, Name name, CatalogueStatus catalogueStatus, Source source, Image image, Variant? variant)
         {
             this.id = id;
             this.name = name;
             this.catalogueStatus = catalogueStatus;
+            this.source = source;
             this.image = image;
             this.variant = variant;
         }
