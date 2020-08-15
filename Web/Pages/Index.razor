@@ -1,0 +1,38 @@
+﻿@page "/"
+
+<Form 
+    Model=@filterCache
+    OnFinish=@OnApplyFilters
+>
+    <FormItem Label="Search" >
+        <Input Value=@filterCache.Search OnChange=@OnChangeSearch TValue=@string/>
+        @* <Input @bind-Value=@model.Search/> *@
+    </FormItem>
+    <FormItem Label="Catalogue">
+        <Select Mode=Multiple OnChange=@OnChangeCatalogueStatuses>
+            <SelectOption Value="FOR_SALE">For sale</SelectOption>
+            <SelectOption Value="NOT_FOR_SALE">Not for sale</SelectOption>
+            <SelectOption Value="NOT_EXIST">Not in catalog</SelectOption>
+        </Select>
+    </FormItem>
+    <FormItem Label="Source">
+        <Select Mode=Multiple OnChange=@OnChangeSources>
+            <SelectOption Value="NOOKS_CRANNY">Nook's cranny</SelectOption>
+            <SelectOption Value="CRAFTING">Crafting</SelectOption>
+            <SelectOption Value="UNKNOWN">Unknown</SelectOption>
+        </Select>
+    </FormItem>
+    <FormItem>
+        <Button Type=@ButtonType.Primary HtmlType="submit">
+            Submit
+        </Button>
+    </FormItem>
+</Form>
+
+@foreach (var item in items) 
+{
+    <div>
+        @item.name.ToString()
+        @item.variant?.name.ToString()
+    </div>
+}
