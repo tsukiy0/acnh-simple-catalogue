@@ -116,6 +116,30 @@ namespace IngestUtilityTests.IngestService
                 .ThrowAsync<CommunitySheetIngestService.BadCatalogueStatusStringException>();
         }
 
+
+        [Fact]
+        public async Task AlbumImage()
+        {
+            var mock = SetupGetSheetService(new List<IList<object>>
+            {
+                    new List<object> { "Internal ID", "Name", "Catalog", "Source", "Album Image" },
+                    new List<object> { "3200", "K.K. Fusion", "For sale", "K.K. concert; Nook Shopping Catalog", @"=IMAGE(""https://acnhcdn.com/latest/Audio/mjk_Fusion.png"")"},
+            });
+            var service = new CommunitySheetIngestService(new List<IGetSheetService> { mock.Object });
+
+            var actual = await service.Ingest();
+
+            actual.Should().HaveCount(1);
+            actual.Should().Contain(new Item(
+                Item.Id.From("3200"),
+                Item.Name.From("K.K. Fusion"),
+                CatalogueStatus.FOR_SALE,
+                Source.UNKNOWN,
+                Image.From("https://acnhcdn.com/latest/Audio/mjk_Fusion.png"),
+                null
+            ));
+        }
+
         [Theory]
         [InlineData("Nook's Cranny", Source.NOOKS_CRANNY)]
         [InlineData("Crafting", Source.CRAFTING)]

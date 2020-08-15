@@ -40,9 +40,30 @@ namespace IngestUtility.IngestService
                 Item.Name.From(row["Name"].ToString()),
                 CatalogueStatusFromString(row["Catalog"].ToString()),
                 SourceFromString(row["Source"].ToString()),
-                ImageFromString(row["Image"].ToString()),
+                GetImage(row),
                 GetVariant(row)
             );
+        }
+
+        public class ImageKeyNotFound : BaseException { }
+
+        private Image GetImage(IDictionary<string, Object> row)
+        {
+            var concrete = row.ToDictionary(_ => _.Key, _ => _.Value);
+            var albumImage = concrete.GetValueOrDefault("Album Image", null);
+            var image = concrete.GetValueOrDefault("Image", null);
+
+            if (albumImage != null)
+            {
+                return ImageFromString(albumImage.ToString());
+            }
+
+            if (image != null)
+            {
+                return ImageFromString(image.ToString());
+            }
+
+            throw new ImageKeyNotFound();
         }
 
         private Item.Variant? GetVariant(IDictionary<string, Object> row)
