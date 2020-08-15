@@ -6,6 +6,7 @@ namespace Core.Catalogue
 {
     public interface IItemService
     {
+        List<Item> List(ItemFilter filter);
     }
 
     public class InMemoryItemService : IItemService

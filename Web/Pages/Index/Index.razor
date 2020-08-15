@@ -1,5 +1,25 @@
 ﻿@page "/"
-@inject HttpClient Http
+@using Core.Catalogue 
+@inject IItemService ItemService
+
+<Form 
+    Loading=@isLoading
+    Model=@model
+    OnFinish=@OnFinish
+    OnFinishFailed=@OnFinishFailed
+>
+    <FormItem Label="Search" >
+        @* <Input Value=@model.Search OnChange=@OnChangeSearch TValue=@string/> *@
+        <Input @bind-Value=@model.Search/>
+    </FormItem>
+    <FormItem Label="Catalogue">
+        <Select Mode=Multiple OnChange=@OnChangeCatalogueStatuses>
+            <SelectOption Value=@CatalogueStatus.FOR_SALE.ToString()>For sale</SelectOption>
+            <SelectOption Value=@CatalogueStatus.NOT_FOR_SALE.ToString()>Not for sale</SelectOption>
+            <SelectOption Value=@CatalogueStatus.NOT_EXIST.ToString()>Not in catalog</SelectOption>
+        </Select>
+    </FormItem>
+</Form>
 
 @foreach (var item in items) 
 {
@@ -10,10 +30,47 @@
 }
 
 @code {
+    public class Model
+    {
+        public string Search { get; set; }
+        public List<CatalogueStatus> CatalogueStatuses { get; set; }
+        public List<Source> Sources { get; set; }
+    }
+
+    private Model model = new Model{
+        Search = "",
+        CatalogueStatuses = new List<CatalogueStatus>(),
+        Sources = new List<Source>()
+    };
+
+    private bool isLoading = false;
+
     private List<Item> items = new List<Item>();
 
-    protected override async Task OnInitializedAsync()
-    {
-        items = await Http.GetFromJsonAsync<List<Item>>("api/data.json");
+    private void OnChangeSearch(string input) {
+        Console.WriteLine(input);
+        model.Search = input;
     }
+    
+    private void OnChangeCatalogueStatuses(OneOf<string, IEnumerable<string>, LabeledValue, IEnumerable<LabeledValue>> value, OneOf<SelectOption, IEnumerable<SelectOption>> option)
+    {
+        Console.WriteLine(JsonSerializer.Serialize(value.Value));
+    }
+
+    private void OnFinish(EditContext editContext)
+    {
+        isLoading = true;
+        items = ItemService.List(new ItemFilter(model.Search, new List<CatalogueStatus>(), new List<Source>()));
+        isLoading = false;
+    }
+
+    private void OnFinishFailed(EditContext editContext)
+    {
+        Console.WriteLine("fail");
+    }
+
+    @* protected override async Task OnInitializedAsync()
+    {
+        items = ItemService.List(new ItemFilter("", new List<CatalogueStatus>(), new List<Source>()));
+    } *@
 }
