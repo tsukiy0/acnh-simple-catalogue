@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Core.Catalogue;
 using Core.Shared;
 using System.Text.RegularExpressions;
+using System.Text.Json;
 
 namespace IngestUtility.IngestService
 {
@@ -29,20 +30,38 @@ namespace IngestUtility.IngestService
 
             return result
                 .ToListDictionary()
-                .Select(ToItem)
+                .Aggregate(new List<Item>(), (acc, next) =>
+                {
+                    var item = ToItem(next);
+                    if (item.HasValue)
+                    {
+                        acc.Add(item.Value);
+                    }
+
+                    return acc;
+                })
                 .ToList();
         }
 
-        private Item ToItem(IDictionary<string, Object> row)
+        private Item? ToItem(IDictionary<string, Object> row)
         {
-            return new Item(
-                Item.Id.From(row["Internal ID"].ToString()),
-                Item.Name.From(row["Name"].ToString()),
-                CatalogueStatusFromString(row["Catalog"].ToString()),
-                SourceFromString(row["Source"].ToString()),
-                GetImage(row),
-                GetVariant(row)
-            );
+            try
+            {
+                return new Item(
+                    Item.Id.From(row["Internal ID"].ToString()),
+                    Item.Name.From(row["Name"].ToString()),
+                    CatalogueStatusFromString(row["Catalog"].ToString()),
+                    SourceFromString(row["Source"].ToString()),
+                    GetImage(row),
+                    GetVariant(row)
+                );
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(JsonSerializer.Serialize(row));
+                Console.WriteLine(e);
+                return null;
+            }
         }
 
         public class ImageKeyNotFound : BaseException { }

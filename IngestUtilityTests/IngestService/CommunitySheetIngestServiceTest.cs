@@ -101,21 +101,20 @@ namespace IngestUtilityTests.IngestService
             actual.Should().ContainSingle(_ => _.catalogueStatus == output);
         }
 
-        [Fact]
-        public async Task UnknownCatalogueStatus()
-        {
-            var mock = SetupGetSheetService(new List<IList<object>>
-            {
-                    new List<object> { "Internal ID", "Name", "Catalog", "Source", "Image", "Variant ID", "Variation" },
-                    new List<object> { "3821", "air circulator", "bad", "Nook's Cranny", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"")", "2_0", "Pink"},
-            });
-            var service = new CommunitySheetIngestService(new List<IGetSheetService> { mock.Object });
+        // [Fact]
+        // public async Task UnknownCatalogueStatus()
+        // {
+        //     var mock = SetupGetSheetService(new List<IList<object>>
+        //     {
+        //             new List<object> { "Internal ID", "Name", "Catalog", "Source", "Image", "Variant ID", "Variation" },
+        //             new List<object> { "3821", "air circulator", "bad", "Nook's Cranny", @"=IMAGE(""https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"")", "2_0", "Pink"},
+        //     });
+        //     var service = new CommunitySheetIngestService(new List<IGetSheetService> { mock.Object });
 
-            await FluentActions.Invoking(async () => await service.Ingest())
-                .Should()
-                .ThrowAsync<CommunitySheetIngestService.BadCatalogueStatusStringException>();
-        }
-
+        //     await FluentActions.Invoking(async () => await service.Ingest())
+        //         .Should()
+        //         .ThrowAsync<CommunitySheetIngestService.BadCatalogueStatusStringException>();
+        // }
 
         [Fact]
         public async Task AlbumImage()
