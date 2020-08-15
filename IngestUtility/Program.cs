@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Core.Shared;
@@ -16,8 +17,20 @@ namespace IngestUtility
             var apiKey = configService.Get("GOOGLE_API_KEY");
             var sheetId = configService.Get("COMMUNITY_SHEET_ID");
             var outputPath = configService.Get("OUTPUT_PATH");
-            var getSheetService = GetSheetService.Default(apiKey, sheetId, "Housewares");
-            var service = new CommunitySheetIngestService(new List<IGetSheetService> { getSheetService });
+            var getSheeetServices = new List<string> {
+                "Housewares",
+                "Miscellaneous",
+                "Wall-mounted",
+                "Wallpaper",
+                "Floors",
+                "Rugs",
+                "Photos",
+                "Posters",
+                "Art",
+                "Fossils",
+                "Music",
+             }.Select(_ => (IGetSheetService)GetSheetService.Default(apiKey, sheetId, _)).ToList();
+            var service = new CommunitySheetIngestService(getSheeetServices);
 
             var result = await service.Ingest();
 
