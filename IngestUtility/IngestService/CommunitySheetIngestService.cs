@@ -10,14 +10,20 @@ namespace IngestUtility.IngestService
 {
     public class CommunitySheetIngestService : IIngestService
     {
-        public readonly IGetSheetService getSheetService;
+        private readonly IList<IGetSheetService> getSheetServices;
 
-        public CommunitySheetIngestService(IGetSheetService getSheetService)
+        public CommunitySheetIngestService(IList<IGetSheetService> getSheetServices)
         {
-            this.getSheetService = getSheetService;
+            this.getSheetServices = getSheetServices;
         }
 
         public async Task<IList<Item>> Ingest()
+        {
+            var results = new List<IList<Item>>(await Task.WhenAll(getSheetServices.Select(IngestOne)));
+            return results.SelectMany(_ => _).ToList();
+        }
+
+        private async Task<IList<Item>> IngestOne(IGetSheetService getSheetService)
         {
             var result = await getSheetService.Get();
 
@@ -27,7 +33,7 @@ namespace IngestUtility.IngestService
                 .ToList();
         }
 
-        private Item ToItem(Dictionary<string, Object> row)
+        private Item ToItem(IDictionary<string, Object> row)
         {
             return new Item(
                 Item.Id.From(row["Internal ID"].ToString()),
@@ -39,9 +45,11 @@ namespace IngestUtility.IngestService
             );
         }
 
-        private Item.Variant? GetVariant(Dictionary<string, Object> row)
+        private Item.Variant? GetVariant(IDictionary<string, Object> row)
         {
-            var variantId = row.GetValueOrDefault("Variant ID", null)?.ToString();
+            var variantId = row
+                .ToDictionary(_ => _.Key, _ => _.Value)
+                .GetValueOrDefault("Variant ID", null);
 
             if (variantId == null)
             {

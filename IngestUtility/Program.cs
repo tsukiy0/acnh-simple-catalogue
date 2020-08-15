@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace IngestUtility
             var sheetId = configService.Get("COMMUNITY_SHEET_ID");
             var outputPath = configService.Get("OUTPUT_PATH");
             var getSheetService = GetSheetService.Default(apiKey, sheetId, "Housewares");
-            var service = new CommunitySheetIngestService(getSheetService);
+            var service = new CommunitySheetIngestService(new List<IGetSheetService> { getSheetService });
 
             var result = await service.Ingest();
 
