@@ -24,6 +24,7 @@ namespace Core.Catalogue
             public string name { get; set; }
             public CatalogueStatus catalogueStatus { get; set; }
             public string image { get; set; }
+            [JsonConverter(typeof(NullableStructSerializerFactory))]
             public VariantJson? variant { get; set; }
 
             public static ItemJson From(Item input)
@@ -34,7 +35,7 @@ namespace Core.Catalogue
                     name = input.name.ToString(),
                     catalogueStatus = input.catalogueStatus,
                     image = input.image.ToString(),
-                    variant = input.variant.Select(VariantJson.From)
+                    variant = input.variant.Select(_ => VariantJson.From(_))
                 };
             }
 
