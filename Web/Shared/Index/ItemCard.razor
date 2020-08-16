@@ -1,0 +1,13 @@
+<Card 
+    Bordered
+>
+    <Cover>
+        <img alt=@Item.name.ToString() src=@Item.image.ToString() />
+    </Cover>
+    <ChildContent>
+        <CardMeta>
+            <Title>@Item.name</Title>
+            <Description>@Item.variant?.name</Description>
+        </CardMeta>
+    </ChildContent>
+</Card>
