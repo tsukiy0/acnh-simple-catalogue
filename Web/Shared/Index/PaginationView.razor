@@ -1,1 +1,6 @@
-<Pagination Current=@GetCurrent() Total=@GetTotal() CurrentChanged=@OnChangePage></Pagination>
+@{
+    var Current = (int)(Cursor.Offset / Cursor.Limit);
+    var Total = (int)(Count / Cursor.Limit);
+}
+
+<Pagination Current=@Current Total=@Total CurrentChanged=@OnChangePage></Pagination>

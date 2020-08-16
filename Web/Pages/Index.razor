@@ -2,6 +2,8 @@
 
 <ItemFilterView Model=@Filter OnChange=@OnChangeFilter />
 
+<PaginationView Count=@Page.Count Cursor=@Cursor OnChange=@OnChangeCursor />
+
 <Row Gutter=@((8, 8))>
     @foreach (var item in Page.Items) 
     {

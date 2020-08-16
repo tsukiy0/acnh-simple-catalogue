@@ -25,6 +25,12 @@ namespace Web.Pages
             Page = ItemService.List(Filter, Cursor);
         }
 
+        private void OnChangeCursor(PageCursor cursor)
+        {
+            Cursor = cursor;
+            Page = ItemService.List(Filter, Cursor);
+        }
+
         protected override void OnInitialized()
         {
             Page = ItemService.List(Filter, Cursor);

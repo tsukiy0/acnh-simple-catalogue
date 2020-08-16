@@ -28,7 +28,7 @@ namespace Web.Shared.Index
         {
             OnChange.InvokeAsync(new PageCursor(
                 Cursor.Limit,
-                (uint)page
+                (uint)(page * Cursor.Limit)
             ));
         }
     }
