@@ -1,27 +1,23 @@
+using System;
 using System.Collections.Generic;
 using Core.Catalogue;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
 
 namespace Web.Pages
 {
     public partial class Index : ComponentBase
     {
         [Inject]
-        private IItemService itemService { get; set; }
+        private IItemService ItemService { get; set; }
 
-        private ItemFilter filter;
+        private ItemFilter Filter = new ItemFilter("", new List<CatalogueStatus>(), new List<Source>());
 
-        private List<Item> items = new List<Item>();
+        private List<Item> Items = new List<Item>();
 
         private void OnChangeFilter(ItemFilter filter)
         {
-            this.filter = filter;
-        }
-
-        private void OnApplyFilters(EditContext editContext)
-        {
-            items = itemService.List(filter);
+            Filter = filter;
+            Items = ItemService.List(filter);
         }
     }
 }

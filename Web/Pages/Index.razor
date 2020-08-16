@@ -1,11 +1,12 @@
 ﻿@page "/"
 
-<ItemFilterView Model=@filter OnChange=@OnChangeFilter />
+<ItemFilterView Model=@Filter OnChange=@OnChangeFilter />
 
-@foreach (var item in items) 
-{
-    <div>
-        @item.name.ToString()
-        @item.variant?.name.ToString()
-    </div>
-}
+<Row>
+    @foreach (var item in Items) 
+    {
+        <AntDesign.Col Span="6">
+            <ItemCard Item=@item/>
+        </AntDesign.Col>
+    }
+</Row>
