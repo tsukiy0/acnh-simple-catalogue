@@ -6,7 +6,7 @@ namespace Core.Catalogue
 {
     public interface IItemService
     {
-        List<Item> List(ItemFilter filter, PageCursor cursor);
+        Page<Item> List(ItemFilter filter, PageCursor cursor);
     }
 
     public class InMemoryItemService : IItemService
@@ -18,15 +18,21 @@ namespace Core.Catalogue
             this.items = items;
         }
 
-        public List<Item> List(ItemFilter filter, PageCursor cursor)
+        public Page<Item> List(ItemFilter filter, PageCursor cursor)
         {
-            return items
+            var query = items
                 .Where(_ => filter.CatalogueStatuses.Count == 0 || filter.CatalogueStatuses.Contains(_.catalogueStatus))
                 .Where(_ => filter.Sources.Count == 0 || filter.Sources.Contains(_.Source))
-                .Where(_ => filter.Search.Count() == 0 || _.Name.ToString().ToLower().Contains(filter.Search.ToLower()))
-                .Skip((int)cursor.Offset)
-                .Take((int)cursor.Limit)
-                .ToList();
+                .Where(_ => filter.Search.Count() == 0 || _.Name.ToString().ToLower().Contains(filter.Search.ToLower()));
+                
+
+            return new Page<Item>(
+                query
+                    .Skip((int)cursor.Offset)
+                    .Take((int)cursor.Limit)
+                    .ToList(),
+                (uint)query.Count()
+            );
         }
 
         public Dictionary<ItemId, List<Item>> GroupByVariants()

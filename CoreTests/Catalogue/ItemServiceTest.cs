@@ -33,8 +33,9 @@ namespace CoreTests.Catalogue
                     new PageCursor(100, 0)
                 );
 
-                actual.Should().HaveCount(1);
-                actual[0].Should().Be(item);
+                actual.Count.Should().Be(1);
+                actual.Items.Should().HaveCount(1);
+                actual.Items.Should().Contain(item);
             }
 
             [Fact]
@@ -65,8 +66,9 @@ namespace CoreTests.Catalogue
                     new PageCursor(100, 0)
                 );
 
-                actual.Should().HaveCount(1);
-                actual.Should().Contain(items[1]);
+                actual.Count.Should().Be(1);
+                actual.Items.Should().HaveCount(1);
+                actual.Items.Should().Contain(items[1]);
             }
 
             [Fact]
@@ -97,8 +99,9 @@ namespace CoreTests.Catalogue
                     new PageCursor(100, 0)
                 );
 
-                actual.Should().HaveCount(2);
-                actual.Should().Contain(items);
+                actual.Count.Should().Be(2);
+                actual.Items.Should().HaveCount(2);
+                actual.Items.Should().Contain(items);
             }
 
             [Fact]
@@ -129,8 +132,9 @@ namespace CoreTests.Catalogue
                     new PageCursor(100, 0)
                 );
 
-                actual.Should().HaveCount(1);
-                actual.Should().Contain(items[1]);
+                actual.Count.Should().Be(1);
+                actual.Items.Should().HaveCount(1);
+                actual.Items.Should().Contain(items[1]);
             }
 
             [Fact]
@@ -161,8 +165,9 @@ namespace CoreTests.Catalogue
                     new PageCursor(100, 0)
                 );
 
-                actual.Should().HaveCount(2);
-                actual.Should().Contain(items);
+                actual.Count.Should().Be(2);
+                actual.Items.Should().HaveCount(2);
+                actual.Items.Should().Contain(items);
             }
         }
 
@@ -197,8 +202,9 @@ namespace CoreTests.Catalogue
                 new PageCursor(100, 0)
             );
 
-            actual.Should().HaveCount(1);
-            actual.Should().Contain(items[0]);
+            actual.Count.Should().Be(1);
+            actual.Items.Should().HaveCount(1);
+            actual.Items.Should().Contain(items[0]);
         }
     }
 

@@ -3,7 +3,7 @@
 <ItemFilterView Model=@Filter OnChange=@OnChangeFilter />
 
 <Row Gutter=@((8, 8))>
-    @foreach (var item in Items) 
+    @foreach (var item in Page.Items) 
     {
         <AntDesign.Col Span="4">
             <ItemCard Item=@item/>

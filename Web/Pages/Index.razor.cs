@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Core.Catalogue;
 using Core.Shared;
 using Microsoft.AspNetCore.Components;
@@ -16,17 +14,20 @@ namespace Web.Pages
 
         private PageCursor Cursor = new PageCursor(20, 0);
 
-        private List<Item> Items = new List<Item>();
+        private Page<Item> Page = new Page<Item>(
+            new List<Item>(),
+            0
+        );
 
         private void OnChangeFilter(ItemFilter filter)
         {
             Filter = filter;
-            Items = ItemService.List(Filter, Cursor);
+            Page = ItemService.List(Filter, Cursor);
         }
 
         protected override void OnInitialized()
         {
-            Items = ItemService.List(Filter, Cursor);
+            Page = ItemService.List(Filter, Cursor);
         }
     }
 }
