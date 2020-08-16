@@ -48,8 +48,8 @@ namespace IngestUtility.IngestService
             try
             {
                 return new Item(
-                    Item.Id.From(row["Internal ID"].ToString()),
-                    Item.Name.From(row["Name"].ToString()),
+                    ItemId.From(row["Internal ID"].ToString()),
+                    ItemName.From(row["Name"].ToString()),
                     CatalogueStatusFromString(row["Catalog"].ToString()),
                     SourceFromString(row["Source"].ToString()),
                     GetImage(row),
@@ -85,7 +85,7 @@ namespace IngestUtility.IngestService
             throw new ImageKeyNotFound();
         }
 
-        private Item.Variant? GetVariant(IDictionary<string, Object> row)
+        private ItemVariant? GetVariant(IDictionary<string, Object> row)
         {
             var variantId = row
                 .ToDictionary(_ => _.Key, _ => _.Value)
@@ -101,9 +101,9 @@ namespace IngestUtility.IngestService
                 return null;
             }
 
-            return new Item.Variant(
-                Item.Variant.Id.From(variantId.ToString()),
-                Item.Variant.Name.From(row["Variation"].ToString())
+            return new ItemVariant(
+                ItemVariantId.From(variantId.ToString()),
+                ItemVariantName.From(row["Variation"].ToString())
             );
         }
 

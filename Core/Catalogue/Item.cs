@@ -3,114 +3,23 @@ using System.Text.Json.Serialization;
 namespace Core.Catalogue
 {
     [JsonConverter(typeof(ItemConverter))]
-    public struct Item
+    public partial struct Item
     {
-        public readonly Id id;
-        public readonly Name name;
+        public readonly ItemId Id;
+        public readonly ItemName Name;
         public readonly CatalogueStatus catalogueStatus;
-        public readonly Source source;
-        public readonly Image image;
-        public readonly Variant? variant;
+        public readonly Source Source;
+        public readonly Image Image;
+        public readonly ItemVariant? Variant;
 
-        public Item(Id id, Name name, CatalogueStatus catalogueStatus, Source source, Image image, Variant? variant)
+        public Item(ItemId id, ItemName name, CatalogueStatus catalogueStatus, Source source, Image image, ItemVariant? variant)
         {
-            this.id = id;
-            this.name = name;
+            this.Id = id;
+            this.Name = name;
             this.catalogueStatus = catalogueStatus;
-            this.source = source;
-            this.image = image;
-            this.variant = variant;
-        }
-
-        public struct Id
-        {
-            private string value { get; }
-
-            private Id(string value)
-            {
-                this.value = value;
-            }
-
-            public static Id From(string input)
-            {
-                return new Id(input);
-            }
-
-            override public string ToString()
-            {
-                return value;
-            }
-        }
-
-        public struct Name
-        {
-            private string value { get; }
-
-            private Name(string value)
-            {
-                this.value = value;
-            }
-
-            public static Name From(string input)
-            {
-                return new Name(input);
-            }
-
-            override public string ToString()
-            {
-                return value;
-            }
-        }
-
-        public struct Variant
-        {
-            public readonly Id id;
-            public readonly Name name;
-
-            public Variant(Id id, Name name)
-            {
-                this.id = id;
-                this.name = name;
-            }
-            public struct Id
-            {
-                private readonly string value;
-
-                private Id(string value)
-                {
-                    this.value = value;
-                }
-
-                public static Id From(string input)
-                {
-                    return new Id(input);
-                }
-
-                override public string ToString()
-                {
-                    return value;
-                }
-            }
-
-            public struct Name
-            {
-                private readonly string value;
-
-                private Name(string value)
-                {
-                    this.value = value;
-                }
-
-                public static Name From(string input)
-                {
-                    return new Name(input);
-                }
-
-                override public string ToString()
-                {
-                    return value;
-                }
-            }
+            this.Source = source;
+            this.Image = image;
+            this.Variant = variant;
         }
     }
 }

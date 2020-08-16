@@ -16,8 +16,8 @@ namespace CoreTests.Catalogue
             public void All()
             {
                 var item = new Item(
-                    Item.Id.From("1"),
-                    Item.Name.From("acoustic guitar"),
+                    ItemId.From("1"),
+                    ItemName.From("acoustic guitar"),
                     CatalogueStatus.NOT_FOR_SALE,
                     Source.CRAFTING,
                     Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
@@ -42,16 +42,16 @@ namespace CoreTests.Catalogue
             {
                 var items = new List<Item> {
                     new Item(
-                        Item.Id.From("1"),
-                        Item.Name.From("acoustic guitar"),
+                        ItemId.From("1"),
+                        ItemName.From("acoustic guitar"),
                         CatalogueStatus.NOT_FOR_SALE,
                         Source.CRAFTING,
                         Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
                         null
                     ),
                     new Item(
-                        Item.Id.From("1"),
-                        Item.Name.From("formal paper"),
+                        ItemId.From("1"),
+                        ItemName.From("formal paper"),
                         CatalogueStatus.FOR_SALE,
                         Source.CRAFTING,
                         Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
@@ -74,16 +74,16 @@ namespace CoreTests.Catalogue
             {
                 var items = new List<Item> {
                     new Item(
-                        Item.Id.From("1"),
-                        Item.Name.From("acoustic guitar"),
+                        ItemId.From("1"),
+                        ItemName.From("acoustic guitar"),
                         CatalogueStatus.NOT_FOR_SALE,
                         Source.CRAFTING,
                         Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
                         null
                     ),
                     new Item(
-                        Item.Id.From("1"),
-                        Item.Name.From("formal paper"),
+                        ItemId.From("1"),
+                        ItemName.From("formal paper"),
                         CatalogueStatus.FOR_SALE,
                         Source.CRAFTING,
                         Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
@@ -106,16 +106,16 @@ namespace CoreTests.Catalogue
             {
                 var items = new List<Item> {
                     new Item(
-                        Item.Id.From("1"),
-                        Item.Name.From("acoustic guitar"),
+                        ItemId.From("1"),
+                        ItemName.From("acoustic guitar"),
                         CatalogueStatus.FOR_SALE,
                         Source.CRAFTING,
                         Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
                         null
                     ),
                     new Item(
-                        Item.Id.From("1"),
-                        Item.Name.From("formal paper"),
+                        ItemId.From("1"),
+                        ItemName.From("formal paper"),
                         CatalogueStatus.FOR_SALE,
                         Source.NOOKS_CRANNY,
                         Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
@@ -138,16 +138,16 @@ namespace CoreTests.Catalogue
             {
                 var items = new List<Item> {
                     new Item(
-                        Item.Id.From("1"),
-                        Item.Name.From("acoustic guitar"),
+                        ItemId.From("1"),
+                        ItemName.From("acoustic guitar"),
                         CatalogueStatus.FOR_SALE,
                         Source.CRAFTING,
                         Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
                         null
                     ),
                     new Item(
-                        Item.Id.From("1"),
-                        Item.Name.From("formal paper"),
+                        ItemId.From("1"),
+                        ItemName.From("formal paper"),
                         CatalogueStatus.FOR_SALE,
                         Source.NOOKS_CRANNY,
                         Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
@@ -174,16 +174,16 @@ namespace CoreTests.Catalogue
         {
             var items = new List<Item> {
                     new Item(
-                        Item.Id.From("1"),
-                        Item.Name.From("acoustic guitar"),
+                        ItemId.From("1"),
+                        ItemName.From("acoustic guitar"),
                         CatalogueStatus.FOR_SALE,
                         Source.CRAFTING,
                         Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
                         null
                     ),
                     new Item(
-                        Item.Id.From("1"),
-                        Item.Name.From("formal paper"),
+                        ItemId.From("1"),
+                        ItemName.From("formal paper"),
                         CatalogueStatus.FOR_SALE,
                         Source.NOOKS_CRANNY,
                         Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
@@ -209,8 +209,8 @@ namespace CoreTests.Catalogue
         public void ItemWithoutVariants()
         {
             var item = new Item(
-                Item.Id.From("1"),
-                Item.Name.From("acoustic guitar"),
+                ItemId.From("1"),
+                ItemName.From("acoustic guitar"),
                 CatalogueStatus.NOT_FOR_SALE,
                 Source.CRAFTING,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
@@ -223,34 +223,34 @@ namespace CoreTests.Catalogue
 
             var actual = service.GroupByVariants();
 
-            actual.Should().ContainKeys(item.id);
-            actual[item.id].Should().HaveCount(1);
-            actual[item.id][0].id.Should().Be(item.id);
+            actual.Should().ContainKeys(item.Id);
+            actual[item.Id].Should().HaveCount(1);
+            actual[item.Id][0].Id.Should().Be(item.Id);
         }
 
         [Fact]
         public void ItemWithVariants()
         {
             var item1 = new Item(
-                Item.Id.From("1"),
-                Item.Name.From("acoustic guitar"),
+                ItemId.From("1"),
+                ItemName.From("acoustic guitar"),
                 CatalogueStatus.NOT_FOR_SALE,
                 Source.CRAFTING,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
-                new Item.Variant(
-                    Item.Variant.Id.From("0_0"),
-                    Item.Variant.Name.From("Natural")
+                new ItemVariant(
+                    ItemVariantId.From("0_0"),
+                    ItemVariantName.From("Natural")
                 )
             );
             var item2 = new Item(
-                Item.Id.From("1"),
-                Item.Name.From("acoustic guitar"),
+                ItemId.From("1"),
+                ItemName.From("acoustic guitar"),
                 CatalogueStatus.NOT_FOR_SALE,
                 Source.CRAFTING,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
-                new Item.Variant(
-                    Item.Variant.Id.From("1_0"),
-                    Item.Variant.Name.From("Natural")
+                new ItemVariant(
+                    ItemVariantId.From("1_0"),
+                    ItemVariantName.From("Natural")
                 )
             );
             var items = new List<Item>{
@@ -261,10 +261,10 @@ namespace CoreTests.Catalogue
 
             var actual = service.GroupByVariants();
 
-            actual.Should().ContainKeys(item1.id);
-            actual[item1.id].Should().HaveCount(2);
-            actual[item1.id][0].id.Should().Be(item1.id);
-            actual[item1.id][0].id.Should().Be(item2.id);
+            actual.Should().ContainKeys(item1.Id);
+            actual[item1.Id].Should().HaveCount(2);
+            actual[item1.Id][0].Id.Should().Be(item1.Id);
+            actual[item1.Id][0].Id.Should().Be(item2.Id);
         }
     }
 
@@ -276,8 +276,8 @@ namespace CoreTests.Catalogue
         public void ItemWithoutVariant()
         {
             var item = new Item(
-                Item.Id.From("1"),
-                Item.Name.From("acoustic guitar"),
+                ItemId.From("1"),
+                ItemName.From("acoustic guitar"),
                 CatalogueStatus.NOT_FOR_SALE,
                 Source.CRAFTING,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
@@ -288,7 +288,7 @@ namespace CoreTests.Catalogue
                 };
             var service = new InMemoryItemService(items);
 
-            var actual = service.Get(item.id, null);
+            var actual = service.Get(item.Id, null);
 
             actual.Should().Be(item);
         }
@@ -297,14 +297,14 @@ namespace CoreTests.Catalogue
         public void ItemWithVariant()
         {
             var item = new Item(
-                Item.Id.From("1"),
-                Item.Name.From("acoustic guitar"),
+                ItemId.From("1"),
+                ItemName.From("acoustic guitar"),
                 CatalogueStatus.NOT_FOR_SALE,
                 Source.CRAFTING,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
-                new Item.Variant(
-                    Item.Variant.Id.From("1_0"),
-                    Item.Variant.Name.From("Natural")
+                new ItemVariant(
+                    ItemVariantId.From("1_0"),
+                    ItemVariantName.From("Natural")
                 )
             );
             var items = new List<Item>{
@@ -312,7 +312,7 @@ namespace CoreTests.Catalogue
                 };
             var service = new InMemoryItemService(items);
 
-            var actual = service.Get(item.id, item.variant?.id);
+            var actual = service.Get(item.Id, item.Variant?.Id);
 
             actual.Should().Be(item);
         }
@@ -321,14 +321,14 @@ namespace CoreTests.Catalogue
         public void ItemNotExists()
         {
             var item = new Item(
-                Item.Id.From("1"),
-                Item.Name.From("acoustic guitar"),
+                ItemId.From("1"),
+                ItemName.From("acoustic guitar"),
                 CatalogueStatus.NOT_FOR_SALE,
                 Source.CRAFTING,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png"),
-                new Item.Variant(
-                    Item.Variant.Id.From("1_0"),
-                    Item.Variant.Name.From("Natural")
+                new ItemVariant(
+                    ItemVariantId.From("1_0"),
+                    ItemVariantName.From("Natural")
                 )
             );
             var items = new List<Item>{
@@ -338,7 +338,7 @@ namespace CoreTests.Catalogue
 
 
             FluentActions
-                .Invoking(() => service.Get(Item.Id.From("1234"), null))
+                .Invoking(() => service.Get(ItemId.From("1234"), null))
                 .Should().Throw<InvalidOperationException>();
         }
     }

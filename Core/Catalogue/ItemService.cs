@@ -22,49 +22,49 @@ namespace Core.Catalogue
         {
             return items
                 .Where(_ => filter.CatalogueStatuses.Count == 0 || filter.CatalogueStatuses.Contains(_.catalogueStatus))
-                .Where(_ => filter.Sources.Count == 0 || filter.Sources.Contains(_.source))
-                .Where(_ => filter.Search.Count() == 0 || _.name.ToString().ToLower().Contains(filter.Search.ToLower()))
+                .Where(_ => filter.Sources.Count == 0 || filter.Sources.Contains(_.Source))
+                .Where(_ => filter.Search.Count() == 0 || _.Name.ToString().ToLower().Contains(filter.Search.ToLower()))
                 .Skip((int)cursor.Offset)
                 .Take((int)cursor.Limit)
                 .ToList();
         }
 
-        public Dictionary<Item.Id, List<Item>> GroupByVariants()
+        public Dictionary<ItemId, List<Item>> GroupByVariants()
         {
             return items
-                .GroupBy(_ => _.id)
+                .GroupBy(_ => _.Id)
                 .ToDictionary(_ => _.Key, _ => _.ToList());
         }
 
-        public Item Get(Item.Id id, Item.Variant.Id? variantId)
+        public Item Get(ItemId id, ItemVariantId? variantId)
         {
             return items.Single(item =>
             {
-                var hasMatchingId = id.Equals(item.id);
-                var hasNoVariant = !variantId.HasValue && !item.variant.HasValue;
+                var hasMatchingId = id.Equals(item.Id);
+                var hasNoVariant = !variantId.HasValue && !item.Variant.HasValue;
                 var hasMatchingVariant = hasNoVariant || variantId
-                    .Select(_ => _.Equals(item.variant?.id))
+                    .Select(_ => _.Equals(item.Variant?.Id))
                     .GetValueOrDefault(false);
 
                 return hasMatchingId && hasMatchingVariant;
             });
         }
 
-        public List<Item> Get(Item.Id id)
+        public List<Item> Get(ItemId id)
         {
             return GroupByVariants()[id];
         }
 
-        private Dictionary<Item.Id, List<Item>> GroupByVariants(List<Item> items)
+        private Dictionary<ItemId, List<Item>> GroupByVariants(List<Item> items)
         {
             return items
-                .GroupBy(_ => _.id)
+                .GroupBy(_ => _.Id)
                 .ToDictionary(_ => _.Key, _ => _.ToList());
         }
 
         public bool IsAKeeper(Item item)
         {
-            var isCraftable = item.source == Source.CRAFTING;
+            var isCraftable = item.Source == Source.CRAFTING;
             var isForSale = item.catalogueStatus == CatalogueStatus.FOR_SALE;
 
             return !isCraftable && !isForSale;

@@ -25,8 +25,8 @@ namespace IngestUtilityTests.IngestService
 
             actual.Should().HaveCount(1);
             actual.Should().Contain(new Item(
-                Item.Id.From("1317"),
-                Item.Name.From("anatomical model"),
+                ItemId.From("1317"),
+                ItemName.From("anatomical model"),
                 CatalogueStatus.FOR_SALE,
                 Source.NOOKS_CRANNY,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAnatomicalmodel.png"),
@@ -48,14 +48,14 @@ namespace IngestUtilityTests.IngestService
 
             actual.Should().HaveCount(1);
             actual.Should().Contain(new Item(
-                Item.Id.From("3821"),
-                Item.Name.From("air circulator"),
+                ItemId.From("3821"),
+                ItemName.From("air circulator"),
                 CatalogueStatus.FOR_SALE,
                 Source.NOOKS_CRANNY,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"),
-                new Item.Variant(
-                    Item.Variant.Id.From("2_0"),
-                    Item.Variant.Name.From("Pink")
+                new ItemVariant(
+                    ItemVariantId.From("2_0"),
+                    ItemVariantName.From("Pink")
                 )
             ));
         }
@@ -74,8 +74,8 @@ namespace IngestUtilityTests.IngestService
 
             actual.Should().HaveCount(1);
             actual.Should().Contain(new Item(
-                Item.Id.From("5036"),
-                Item.Name.From("aqua tile flooring"),
+                ItemId.From("5036"),
+                ItemName.From("aqua tile flooring"),
                 CatalogueStatus.FOR_SALE,
                 Source.NOOKS_CRANNY,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/RoomTexFloorTile01.png"),
@@ -130,8 +130,8 @@ namespace IngestUtilityTests.IngestService
 
             actual.Should().HaveCount(1);
             actual.Should().Contain(new Item(
-                Item.Id.From("3200"),
-                Item.Name.From("K.K. Fusion"),
+                ItemId.From("3200"),
+                ItemName.From("K.K. Fusion"),
                 CatalogueStatus.FOR_SALE,
                 Source.UNKNOWN,
                 Image.From("https://acnhcdn.com/latest/Audio/mjk_Fusion.png"),
@@ -154,7 +154,7 @@ namespace IngestUtilityTests.IngestService
 
             var actual = await service.Ingest();
 
-            actual.Should().ContainSingle(_ => _.source == output);
+            actual.Should().ContainSingle(_ => _.Source == output);
         }
 
         [Fact]
@@ -176,22 +176,22 @@ namespace IngestUtilityTests.IngestService
 
             actual.Should().HaveCount(2);
             actual.Should().Contain(new Item(
-                Item.Id.From("1317"),
-                Item.Name.From("anatomical model"),
+                ItemId.From("1317"),
+                ItemName.From("anatomical model"),
                 CatalogueStatus.FOR_SALE,
                 Source.NOOKS_CRANNY,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/FtrAnatomicalmodel.png"),
                 null
             ));
             actual.Should().Contain(new Item(
-                Item.Id.From("3821"),
-                Item.Name.From("air circulator"),
+                ItemId.From("3821"),
+                ItemName.From("air circulator"),
                 CatalogueStatus.FOR_SALE,
                 Source.NOOKS_CRANNY,
                 Image.From("https://acnhcdn.com/latest/FtrIcon/FtrCirculator_Remake_2_0.png"),
-                new Item.Variant(
-                    Item.Variant.Id.From("2_0"),
-                    Item.Variant.Name.From("Pink")
+                new ItemVariant(
+                    ItemVariantId.From("2_0"),
+                    ItemVariantName.From("Pink")
                 )
             ));
         }

@@ -32,20 +32,20 @@ namespace Core.Catalogue
             {
                 return new ItemJson()
                 {
-                    id = input.id.ToString(),
-                    name = input.name.ToString(),
+                    id = input.Id.ToString(),
+                    name = input.Name.ToString(),
                     catalogueStatus = input.catalogueStatus,
-                    source = input.source,
-                    image = input.image.ToString(),
-                    variant = input.variant.Select(_ => VariantJson.From(_))
+                    source = input.Source,
+                    image = input.Image.ToString(),
+                    variant = input.Variant.Select(_ => VariantJson.From(_))
                 };
             }
 
             public Item To()
             {
                 return new Item(
-                    Item.Id.From(id),
-                    Item.Name.From(name),
+                    ItemId.From(id),
+                    ItemName.From(name),
                     catalogueStatus,
                     source,
                     Image.From(image),
@@ -58,20 +58,20 @@ namespace Core.Catalogue
                 public string id { get; set; }
                 public string name { get; set; }
 
-                public static VariantJson From(Item.Variant input)
+                public static VariantJson From(ItemVariant input)
                 {
                     return new VariantJson()
                     {
-                        id = input.id.ToString(),
-                        name = input.name.ToString(),
+                        id = input.Id.ToString(),
+                        name = input.Name.ToString(),
                     };
                 }
 
-                public Item.Variant To()
+                public ItemVariant To()
                 {
-                    return new Item.Variant(
-                        Item.Variant.Id.From(id),
-                        Item.Variant.Name.From(name)
+                    return new ItemVariant(
+                        ItemVariantId.From(id),
+                        ItemVariantName.From(name)
                     );
                 }
             }
