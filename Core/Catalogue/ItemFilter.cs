@@ -5,10 +5,10 @@ namespace Core.Catalogue
     public struct ItemFilter
     {
         public readonly string Search;
-        public readonly List<CatalogueStatus> CatalogueStatuses;
-        public readonly List<Source> Sources;
+        public readonly IList<CatalogueStatus> CatalogueStatuses;
+        public readonly IList<Source> Sources;
 
-        public ItemFilter(string search, List<CatalogueStatus> catalogueStatuses, List<Source> sources)
+        public ItemFilter(string search, IList<CatalogueStatus> catalogueStatuses, IList<Source> sources)
         {
             this.Search = search;
             this.CatalogueStatuses = catalogueStatuses;
