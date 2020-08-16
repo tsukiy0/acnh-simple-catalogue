@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Core.Catalogue;
+using Core.Shared;
 using FluentAssertions;
 using Xunit;
 
@@ -27,7 +28,10 @@ namespace CoreTests.Catalogue
                 };
                 var service = new InMemoryItemService(items);
 
-                var actual = service.List(new ItemFilter("", new List<CatalogueStatus>(), new List<Source>()));
+                var actual = service.List(
+                    new ItemFilter("", new List<CatalogueStatus>(), new List<Source>()),
+                    new PageCursor(100, 0)
+                );
 
                 actual.Should().HaveCount(1);
                 actual[0].Should().Be(item);
@@ -56,9 +60,10 @@ namespace CoreTests.Catalogue
                 };
                 var service = new InMemoryItemService(items);
 
-                var actual = service.List(new ItemFilter("", new List<CatalogueStatus>{
-                    CatalogueStatus.FOR_SALE
-                }, new List<Source>()));
+                var actual = service.List(
+                    new ItemFilter("", new List<CatalogueStatus> { CatalogueStatus.FOR_SALE }, new List<Source>()),
+                    new PageCursor(100, 0)
+                );
 
                 actual.Should().HaveCount(1);
                 actual.Should().Contain(items[1]);
@@ -87,10 +92,10 @@ namespace CoreTests.Catalogue
                 };
                 var service = new InMemoryItemService(items);
 
-                var actual = service.List(new ItemFilter("", new List<CatalogueStatus>{
-                    CatalogueStatus.FOR_SALE,
-                    CatalogueStatus.NOT_FOR_SALE
-                }, new List<Source>()));
+                var actual = service.List(
+                    new ItemFilter("", new List<CatalogueStatus> { CatalogueStatus.FOR_SALE, CatalogueStatus.NOT_FOR_SALE }, new List<Source>()),
+                    new PageCursor(100, 0)
+                );
 
                 actual.Should().HaveCount(2);
                 actual.Should().Contain(items);
@@ -119,9 +124,10 @@ namespace CoreTests.Catalogue
                 };
                 var service = new InMemoryItemService(items);
 
-                var actual = service.List(new ItemFilter("", new List<CatalogueStatus> { }, new List<Source>{
-                    Source.NOOKS_CRANNY
-                }));
+                var actual = service.List(
+                    new ItemFilter("", new List<CatalogueStatus>(), new List<Source> { Source.NOOKS_CRANNY }),
+                    new PageCursor(100, 0)
+                );
 
                 actual.Should().HaveCount(1);
                 actual.Should().Contain(items[1]);
@@ -150,10 +156,10 @@ namespace CoreTests.Catalogue
                 };
                 var service = new InMemoryItemService(items);
 
-                var actual = service.List(new ItemFilter("", new List<CatalogueStatus>(), new List<Source>{
-                    Source.NOOKS_CRANNY,
-                    Source.CRAFTING
-                }));
+                var actual = service.List(
+                    new ItemFilter("", new List<CatalogueStatus>(), new List<Source> { Source.NOOKS_CRANNY, Source.CRAFTING }),
+                    new PageCursor(100, 0)
+                );
 
                 actual.Should().HaveCount(2);
                 actual.Should().Contain(items);
@@ -186,7 +192,10 @@ namespace CoreTests.Catalogue
                 };
             var service = new InMemoryItemService(items);
 
-            var actual = service.List(new ItemFilter(search, new List<CatalogueStatus>(), new List<Source>()));
+            var actual = service.List(
+                new ItemFilter(search, new List<CatalogueStatus>(), new List<Source>()),
+                new PageCursor(100, 0)
+            );
 
             actual.Should().HaveCount(1);
             actual.Should().Contain(items[0]);
