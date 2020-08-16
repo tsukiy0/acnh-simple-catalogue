@@ -14,16 +14,19 @@ namespace Web.Pages
 
         private ItemFilter Filter = new ItemFilter("", new List<CatalogueStatus>(), new List<Source>());
 
+        private PageCursor Cursor = new PageCursor(20, 0);
+
         private List<Item> Items = new List<Item>();
 
         private void OnChangeFilter(ItemFilter filter)
         {
             Filter = filter;
-            Items = ItemService.List(Filter, new PageCursor(100, 0));
+            Items = ItemService.List(Filter, Cursor);
         }
+
         protected override void OnInitialized()
         {
-            Items = ItemService.List(Filter, new PageCursor(100, 0));
+            Items = ItemService.List(Filter, Cursor);
         }
     }
 }
