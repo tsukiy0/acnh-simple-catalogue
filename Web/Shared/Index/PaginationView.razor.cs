@@ -1,3 +1,4 @@
+using System;
 using Core.Shared;
 using Microsoft.AspNetCore.Components;
 
@@ -13,16 +14,6 @@ namespace Web.Shared.Index
 
         [Parameter]
         public EventCallback<PageCursor> OnChange { get; set; }
-
-        private int GetCurrent()
-        {
-            return (int)(Cursor.Offset / Cursor.Limit);
-        }
-
-        private int GetTotal()
-        {
-            return (int)(Count / Cursor.Limit);
-        }
 
         private void OnChangePage(int page)
         {

@@ -12,7 +12,7 @@ namespace Web.Pages
 
         private ItemFilter Filter = new ItemFilter("", new List<CatalogueStatus>(), new List<Source>());
 
-        private PageCursor Cursor = new PageCursor(20, 0);
+        private PageCursor Cursor = new PageCursor(36, 0);
 
         private Page<Item> Page = new Page<Item>(
             new List<Item>(),

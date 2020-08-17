@@ -24,7 +24,6 @@ namespace Core.Catalogue
                 .Where(_ => filter.CatalogueStatuses.Count == 0 || filter.CatalogueStatuses.Contains(_.catalogueStatus))
                 .Where(_ => filter.Sources.Count == 0 || filter.Sources.Contains(_.Source))
                 .Where(_ => filter.Search.Count() == 0 || _.Name.ToString().ToLower().Contains(filter.Search.ToLower()));
-                
 
             return new Page<Item>(
                 query
