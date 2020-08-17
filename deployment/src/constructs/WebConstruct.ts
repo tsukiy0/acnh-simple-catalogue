@@ -48,6 +48,18 @@ export class WebConstruct extends Construct {
               minTtl: Duration.minutes(0),
               maxTtl: Duration.minutes(0),
             },
+            {
+              pathPattern: "/_framework/*",
+              defaultTtl: Duration.minutes(0),
+              minTtl: Duration.minutes(0),
+              maxTtl: Duration.minutes(0),
+            },
+            {
+              pathPattern: "/_content/*",
+              defaultTtl: Duration.minutes(0),
+              minTtl: Duration.minutes(0),
+              maxTtl: Duration.minutes(0),
+            },
           ],
         },
       ],
