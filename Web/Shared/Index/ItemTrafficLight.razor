@@ -1,0 +1,7 @@
+@if(Item.catalogueStatus == CatalogueStatus.FOR_SALE) {
+    <Tag Color="green">catalogue</Tag>
+} else if (Item.Source == Source.CRAFTING) {
+    <Tag Color="yellow">crafting</Tag>
+} else  {
+    <Tag Color="red">rare</Tag>
+}
