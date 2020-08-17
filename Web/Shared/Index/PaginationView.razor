@@ -1,6 +1,7 @@
 @{
     var Current = (int)(Cursor.Offset / Cursor.Limit);
-    var Total = (int)Math.Ceiling((double)Count / (double)Cursor.Limit);
+    var Total = (int)Count;
+    var PageSize = (int)Cursor.Limit;
 }
 
-<Pagination Current=@Current Total=@Total CurrentChanged=@OnChangePage></Pagination>
+<Pagination Current=@Current DefaultPageSize=@PageSize Total=@Total CurrentChanged=@OnChangePage />
