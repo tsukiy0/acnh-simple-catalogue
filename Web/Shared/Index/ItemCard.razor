@@ -1,3 +1,7 @@
+@{
+    var description = Item.Variant.HasValue ? Item.Variant.Value.Name.ToString() : "NA";
+}
+
 <Card 
     Bordered
 >
@@ -7,7 +11,7 @@
     <ChildContent>
         <CardMeta>
             <Title>@Item.Name</Title>
-            <Description>@Item.Variant?.Name</Description>
+            <Description><div style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; margin-bottom: 8px">@description</div></Description>
         </CardMeta>
         <ItemTrafficLight Item=@Item />
     </ChildContent>
